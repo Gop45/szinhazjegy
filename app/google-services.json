@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "168115998976",
+    "project_id": "szinhazjegy-192b8",
+    "storage_bucket": "szinhazjegy-192b8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168115998976:android:d3da0c4a226dc6e793a3e5",
+        "android_client_info": {
+          "package_name": "com.example.szinhazjegy_projekt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3ZDp80IxRIweznno-rvFF_UwPNpqUE7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
