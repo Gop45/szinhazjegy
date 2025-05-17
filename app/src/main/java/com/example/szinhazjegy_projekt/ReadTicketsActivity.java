@@ -1,8 +1,12 @@
 package com.example.szinhazjegy_projekt;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -10,36 +14,56 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class ReadTicketsActivity extends AppCompatActivity {
 
-    private TextView jegyListaTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_tickets);
+    }
 
-        jegyListaTextView = findViewById(R.id.jegyListaTextView);
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        LinearLayout container = findViewById(R.id.jegyListaContainer);
+        container.removeAllViews();
 
         FirebaseFirestore.getInstance()
                 .collection("jegyek")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    StringBuilder builder = new StringBuilder();
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         SzinHazJegy jegy = doc.toObject(SzinHazJegy.class);
-                        jegy.setId(doc.getId()); // 👈 manuálisan állítsuk be az id-t
-                        builder.append("Előadás: ").append(jegy.getEloadas()).append("\n")
-                                .append("Dátum: ").append(jegy.getDatum()).append("\n")
-                                .append("Helyszín: ").append(jegy.getHelyszin()).append("\n")
-                                .append("Sor: ").append(jegy.getSor()).append(", Szék: ").append(jegy.getSzek()).append("\n")
-                                .append("Ár: ").append(jegy.getAr()).append(" Ft\n\n");
+                        jegy.setId(doc.getId());
+
+                        String jegySzoveg = "🎭 Előadás: " + jegy.getEloadas() + "\n"
+                                + "📅 Dátum: " + jegy.getDatum() + "\n"
+                                + "📍 Helyszín: " + jegy.getHelyszin() + "\n"
+                                + "🪑 Sor: " + jegy.getSor() + ", Szék: " + jegy.getSzek() + "\n"
+                                + "💸 Ár: " + jegy.getAr() + " Ft\n";
+
+                        TextView t = new TextView(this);
+                        t.setText(jegySzoveg);
+                        t.setPadding(0, 16, 0, 16);
+                        t.setTextSize(16);
+                        t.setOnClickListener(v -> {
+                            Intent intent = new Intent(ReadTicketsActivity.this, EditTicketActivity.class);
+                            intent.putExtra("id", jegy.getId());
+                            intent.putExtra("eloadas", jegy.getEloadas());
+                            intent.putExtra("datum", jegy.getDatum());
+                            intent.putExtra("helyszin", jegy.getHelyszin());
+                            intent.putExtra("sor", jegy.getSor());
+                            intent.putExtra("szek", jegy.getSzek());
+                            intent.putExtra("ar", jegy.getAr());
+                            startActivity(intent);
+                        });
+
+                        container.addView(t);
                     }
-                    jegyListaTextView.setText(builder.toString());
                 })
                 .addOnFailureListener(e -> {
-                    Log.e("FIREBASE_ERROR", "Lekérdezési hiba: " + e.getMessage(), e);
-                    jegyListaTextView.setText("Hiba történt a lekérdezés során: " + e.getMessage());
+                    Toast.makeText(this, "Hiba a jegyek betöltésekor.", Toast.LENGTH_SHORT).show();
                 });
-
-
     }
+
 }

@@ -20,6 +20,7 @@
         <activity android:name=".AboutActivity" />
         <activity android:name=".ReadTicketsActivity" />
         <activity android:name=".AddTicketActivity" />
+        <activity android:name=".EditTicketActivity" />
         <receiver android:name=".AlarmReceiver" />
         <activity
             android:name=".MainActivity"
