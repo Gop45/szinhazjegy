@@ -9,7 +9,6 @@ public class SzinHazJegy {
     private int szek;
     private int ar;
 
-    // Szükséges üres konstruktor Firestore számára
     public SzinHazJegy() {}
 
     public SzinHazJegy(String id, String eloadas, String datum, String helyszin, int sor, int szek, int ar) {
