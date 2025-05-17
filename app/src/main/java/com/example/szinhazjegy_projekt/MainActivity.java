@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        long triggerTime = System.currentTimeMillis() + 10000; // 10 másodperc múlva
+        long triggerTime = System.currentTimeMillis() + 10000; //
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
 

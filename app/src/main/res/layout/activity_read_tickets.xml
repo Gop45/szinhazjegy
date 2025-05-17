@@ -3,19 +3,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/btnHamlet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hamlet előadások listázása"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnJovobeli"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jövőbeli előadások"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnOlcso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Legolcsóbb 5 jegy"
+            android:layout_marginBottom="16dp" />
 
         <LinearLayout
             android:id="@+id/jegyListaContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp" />
-    </ScrollView>
-
-
+            android:orientation="vertical" />
+    </LinearLayout>
 </ScrollView>
-
-
